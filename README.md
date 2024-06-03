@@ -2,4 +2,4 @@
 **bold**
 *italic*
 ***as***
-:tody:
+:bowtie:
