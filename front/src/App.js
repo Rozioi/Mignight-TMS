@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Components/HomePage/Home";
 import Layout from "./Components/Layer/Layout";
-
+import FormAddShoes from "./Components/FormAddShoes/FormAddShoes"
+import NotFound from "./Components/NotFound/NotFound";
 
 
 const App = () => {
@@ -19,6 +20,8 @@ const App = () => {
           <Route path="/profile/:id" element={<Home />}/>
 
         </Route>
+        <Route path="/admin/add" element={<FormAddShoes />}/>
+        <Route path="*" element={<NotFound />} />
 
 
       </Routes>

@@ -1,26 +1,27 @@
 header {
-  background-color: #333;
+  background-color: #ffffff;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
  
-  height: 10%;
+  height: auto;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+  position: fixed;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 header a {
-  color: #fff;
+  color: #000000;
   text-decoration: none;
   margin-right: 20px;
 }
 
 header a:hover {
-  color: #ccc;
+  color: #7c7c7c;
 }
 
 header img {
@@ -39,22 +40,12 @@ header p {
 }
 
 .navlink-active {
-  color: #fff;
-  background-color: #444;
-  padding: 5px 10px;
-  border-radius: 10px;
+  border-bottom: 2px solid rgb(255, 0, 0);
+}
+.navlink-offline {
+  transition: .5s;
 }
 
-.bell-menu {
-  position: relative;
-}
-
-.bell-menu:hover {
-  background-color: #444;
-  padding: 5px 10px;
-  border-radius: 10px;
-}
-
-.bell-menu svg {
-  font-size: 20px;
+.navlink-offline:hover {
+  border-bottom: 2px solid rgb(255, 0, 0);
 }

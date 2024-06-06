@@ -1,3 +1,42 @@
-body,html{
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@font-face {
+    font-family: 'Evolventa';
+    src: url('./../../../public/Font/Evolventa.ttf') format('truetype');
+}
+
+body,
+html {
     margin: 0;
+    background-color: white;
+}
+/* ::-webkit-scrollbar {
+    width: 0;
+  } */
+
+.TitleCoperate {
+    font-family: 'Evolventa', sans-serif;
+    font-weight: 400;
+    font-size: 50px;
+    font-style: normal;
+    text-align: center;
+}
+
+.DiscountShoesList{
+    
+    margin: 0 auto;
+    justify-content: center;
+
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.DiscountShoesList *{
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    margin-right: 10px;
+}
+.Discount-item-info *{
+    margin-bottom: 5px;
 }

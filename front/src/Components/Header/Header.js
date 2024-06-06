@@ -19,37 +19,43 @@ const Header = () => {
   const setActive = ({ isActive }) => isActive ? "navlink-active" : "navlink-offline"
   return (
     <header>
-      <NavLink className={setActive} to={"/"}>
-        <img src="https://i.ibb.co/FBKScSR/OIG3-BAFQ-removebg-preview.png" alt="OIG3-BAFQ-removebg-preview" border="0" />
-      </NavLink>
-      <NavLink className={setActive} to={"/catalog"}>
-        <BsShopWindow />
-      </NavLink>
+  <NavLink className={setActive} to={"/"}>
+    <img src="https://i.ibb.co/FBKScSR/OIG3-BAFQ-removebg-preview.png" alt="OIG3-BAFQ-removebg-preview" border="0" />
+    
+  </NavLink>
+  <NavLink className={setActive} to={"/catalog"}>
+    <BsShopWindow />
+    
+  </NavLink>
 
-      <NavLink className={setActive} to={"/delivery"}>
-        {({ isActive }) => (
-          <span>
-            {isActive ? <BsBoxFill /> : <BsBox />}
-          </span>
-        )}
-      </NavLink>
+  <NavLink className={setActive} to={"/delivery"}>
+    {({ isActive }) => (
+      <span>
+        {isActive ? <BsBoxFill /> : <BsBox />}
+        
+      </span>
+    )}
+  </NavLink>
 
-      <div className="bell-menu" onClick={() => setIsActiveBellMenu(!IsActiveBellMenu)}>
-        {IsActiveBellMenu ? <BsBellFill /> : <BsBell />}
-      </div>
+  <div className="bell-menu" onClick={() => setIsActiveBellMenu(!IsActiveBellMenu)}>
+    {IsActiveBellMenu ? <BsBellFill /> : <BsBell />}
+    
+  </div>
 
-      <NavLink className={setActive} to={`/profile/${id}`}>
-        <FaUserLarge />
-      </NavLink>
+  <NavLink className={setActive} to={`/profile/${id}`}>
+    <FaUserLarge />
+    
+  </NavLink>
 
-      <NavLink className={setActive} to={"/basket"}>
-        {({ isActive }) => (
-          <span>
-            {isActive ? <BsBasket2Fill /> : <BsBasket2 />}
-          </span>
-        )}
-      </NavLink>
-    </header>
+  <NavLink className={setActive} to={"/basket"}>
+    {({ isActive }) => (
+      <span>
+        {isActive ? <BsBasket2Fill /> : <BsBasket2 />}
+        
+      </span>
+    )}
+  </NavLink>
+</header>
   )
 }
 
