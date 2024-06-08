@@ -1,0 +1,10 @@
+.filter-by-Company,.filter-by-Models, .filter-by-Category,.filter-by-Style, .filter-by-Company-active,.filter-by-Models-active, .filter-by-Category-active,.filter-by-Style-active {
+    border-top: 2px solid black;
+    height: auto;
+    width: 250px;
+    border-bottom: 2px solid black;
+    margin-bottom: 5px;
+}
+.filter-by-Company-active p:first-child, .filter-by-Models-active p:first-child, .filter-by-Models-active, .filter-by-Category-active p:first-child,.filter-by-Style-active p:first-child{
+    margin-bottom: 20px;
+}

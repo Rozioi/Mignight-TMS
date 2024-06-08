@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './FormAddShoes.css';
+import axios from 'axios';
 
 
 const CarForm = () => {
-  
+  const api = axios.create({
+    baseURL : "http://localhost:8000"
+  })
+
   const [name, setName] = useState('');
   const [model, setModel] = useState('');
   const [year, setYear] = useState('');
@@ -14,36 +18,19 @@ const CarForm = () => {
   const [style, setStyle] = useState('');
   const [status, setStatus] = useState('');
   const [styleCode, setStyleCode] = useState('');
-  const [newPrice, setNewPrice] = useState('');
-  const [oldPrice, setOldPrice] = useState('');
+  const [NowPrice, setNowPrice] = useState('');
   const [sale, setSale] = useState('');
   const [photo1, setPhoto1] = useState('');
   const [photo2, setPhoto2] = useState('');
 
   const handleSubmit = (e) => {
+    api.post("/shoes-add",{name,model,year,company,color,material,category,style,status,styleCode,NowPrice,sale, photo1,photo2})
     e.preventDefault();
-    console.log({
-      name,
-      model,
-      company,
-      photo1,
-      photo2,
-      material,
-      year,
-      color,
-      category,
-      style,
-      status,
-      styleCode,
-      newPrice,
-      oldPrice,
-      sale,
-    });
   };
 
   return (
     <div>
-      <h1>Введите данные о машине</h1>
+      <h1>Введите данные о кроссовках</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Название:
@@ -102,18 +89,17 @@ const CarForm = () => {
         </label>
         <br />
         <label>
-          Новая цена:
-          <input type="number" value={newPrice} onChange={(e) => setNewPrice(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Старая цена:
-          <input type="number" value={oldPrice} onChange={(e) => setOldPrice(e.target.value)} />
+          Цена без скидки:
+          <input type="number" value={NowPrice} onChange={(e) => setNowPrice(e.target.value)} />
         </label>
         <br />
         <label>
           Скидка:
           <input type="number" value={sale} onChange={(e) => setSale(e.target.value)} />
+        </label>
+        <label>
+          Цена со скидкой:
+          <p>{NowPrice - (NowPrice * (sale / 100))}</p>
         </label>
         <br />
         <button type="submit">Отправить</button>

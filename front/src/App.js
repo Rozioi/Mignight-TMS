@@ -4,6 +4,7 @@ import Home from "./Components/HomePage/Home";
 import Layout from "./Components/Layer/Layout";
 import FormAddShoes from "./Components/FormAddShoes/FormAddShoes"
 import NotFound from "./Components/NotFound/NotFound";
+import Catalog from "./Components/Catalog/Catalog";
 
 
 const App = () => {
@@ -14,7 +15,7 @@ const App = () => {
       <Routes >
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/catalog" element={<Home />} />
+          <Route path="/catalog" element={<Catalog />} />
           <Route path="/delivery" element={<Home />} />
           <Route path="/basket" element={<Home />} />
           <Route path="/profile/:id" element={<Home />}/>

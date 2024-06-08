@@ -3,86 +3,98 @@ const multer = require('multer'); // Middleware для обработки фай
 const path = require('path');
 const db = require('./db.js');
 const cors = require('cors');
+const { error } = require('console');
 
 const app = express();
 const port = 8000;
 app.use(cors());
 app.use(express.json());
 
-// Настройка директории для загрузки файлов
-// const uploadDirVideo = path.join("./uploads", 'video');
-// const uploadDirImage = path.join("./uploads", 'image_poster');
 
-// const storageVideo = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, uploadDirVideo);
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.originalname);
-//   }
-// });
 
-// const storageImagePoster = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, uploadDirImage);
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.originalname);
-//   }
-// });
 
-// const uploadVideo = multer({ storage: storageVideo });
-// const uploadImagePoster = multer({ storage: storageImagePoster });
 
-// // Маршрут для загрузки видеофайла
-// app.post('/upload/video', uploadVideo.single('video'), (req, res) => {
-//   res.send('Видео успешно загружено');
-// });
-
-// // Маршрут для загрузки изображения-постера
-// app.post('/upload/image', uploadImagePoster.single('image'), (req, res) => {
-//   res.send('Изображение успешно загружено');
-// });
-
-app.post("/set-anime", (req, res) => {
-  const {id,title,episode, description, release} = req.body;
-
-  const sql ="INSERT ";
-  db.query(sql, (err,row) => {
+app.get("/all-shoes", (req,res) => {
+  db.query(`SELECT * FROM "Shoes"`,(err,rows) =>{
     if(err){
-      res.send(err);
+      res.status(500).json({error: 'Произошла ошибка при получении списка кроссовок на скидке'})
     }else{
-      res.send("Anime added")
+      res.status(200).json(rows.rows);
     }
-  });
+  })
 });
-app.get("/get-anime", (req, res) => {
-  // Выполнение запроса к базе данных для получения списка видео
-  const sql = "SELECT * FROM anime";
 
-  db.query(sql, (error, result) => {
-    if (error) {
-      console.error('Ошибка выполнения SQL-запроса:', error);
-      res.status(500).json({ error: 'Произошла ошибка при получении списка видео.' });
-    } else {
-      console.log('Список видео успешно получен из базы данных.');
-      res.status(200).json(result.rows); // Предполагается, что результат является массивом объектов с видео
+app.get("/discountShoes", (req,res) => {
+  db.query(`SELECT * FROM "Shoes" WHERE "status" IN ('discount')`,(err,rows) =>{
+    if(err){
+      res.status(500).json({error: 'Произошла ошибка при получении списка кроссовок на скидке'})
+    }else{
+      res.status(200).json(rows.rows);
     }
-  });
+  })
+});
+app.get("/shoes-company", (req,res) =>{
+  db.query(`SELECT company FROM "Shoes"`, (err,row) =>{
+    if(err){
+      res.status(500).json({error: 'Произошла ошибка при получении компаний'});
+    }else{
+      res.status(200).json(row.rows)
+    }
+  })
+});
+app.get("/shoes-style",(req,res) =>{
+  db.query(`SELECT style FROM "Shoes"`, (err,row) =>{
+    if(err){
+      res.status(500).json({error: 'Произошла ошибка при получении стилей'});
+    }else{
+      res.status(200).json(row.rows)
+    }
+  })
+});
+app.get("/shoes-category",(req,res) =>{
+  db.query(`SELECT category FROM "Shoes"`, (err,row) =>{
+    if(err){
+      res.status(500).json({error: 'Произошла ошибка при получении категорий'});
+    }else{
+      res.status(200).json(row.rows)
+    }
+  })
+});
+app.get("/search-shoes/:search", (req,res) =>{
+  const {search} = req.params;
+  db.query(`SELECT * FROM "Shoes" WHERE model LIKE '%${search}%'`,(err,row) =>{
+    if(err){
+      res.status(500).json({error: 'Произошла ошибка при поиске'});
+    }else{
+      res.status(200).json(row.rows)
+    }
+  })
+})
+app.get("/shoes-models", (req,res) =>{
+  db.query(`SELECT model FROM "Shoes"`, (err,row) =>{
+    if(err){
+      res.status(500).json({error: 'Произошла ошибка при получении моделей кроссовок'});
+    }else{
+      res.status(200).json(row.rows)
+    }
+  })
+})
+app.post("/shoes-add", (req,res) => {
+  const {name,model,year,company,color,material,category,style,status,styleCode,NowPrice,sale, photo1,photo2} = req.body;
+  let OldPrice = NowPrice;
+  let NewPrice = NowPrice - (NowPrice * (sale / 100));
+  const sql = `INSERT INTO "Shoes" ("name","model","year","company","color","material","category","style","status","styleCode","NewPrice","OldPrice","sale","photo1","photo2") 
+  VALUES ('${name}','${model}','${year}','${company}','${color}','${material}','${category}','${style}','${status}','${styleCode}',${NewPrice},${OldPrice},${sale},'${photo1}','${photo2}')`;
+  db.query(sql, (err,row) =>{
+    if(err){
+      res.status(500).json({error: 'Произошла ошибка при добавлении'})
+    }else{
+      res.status(200).json({message: 'Кроссовок добавлен'})
+    }
+  })
 });
 
 
-// Маршрут для скачивания видеофайла
-app.get('/download/video/:filename', (req, res) => {
-  const filename = req.params.filename;
-  res.download(path.join(uploadDirVideo, filename));
-});
-
-// Маршрут для скачивания изображения-постера
-app.get('/download/image/:filename', (req, res) => {
-  const filename = req.params.filename;
-  res.download(path.join(uploadDirImage, filename));
-});
 
 app.listen(port, () => {
   console.log(`Сервер запущен на порту ${port}`);

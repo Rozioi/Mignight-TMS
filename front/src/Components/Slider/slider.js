@@ -7,11 +7,12 @@ const Slider = () => {
         intialIndex: 2
     }
     const brand = {
-        id: [1, 2, 3],
-        title: ["New Balance", "Nike", "Adidas"],
+        id: [1, 2, 3, 4],
+        title: ["New Balance", "Nike", "Asics","Adidas"] ,
         image: [
             "https://www.comfortorthotics.ca/wp-content/uploads/2020/09/NB_Stckd_logo_PMS-186-1.jpg",
             "https://th.bing.com/th/id/OIP.I08Vr2CbX0YxeC1eEhB6dQAAAA?rs=1&pid=ImgDetMain",
+            "https://th.bing.com/th/id/OIP.LrmFh8PpmL_6FkDfKX57jgHaHa?w=630&h=630&rs=1&pid=ImgDetMain",
             "https://stickersworks.co.uk/wp-content/uploads/2019/11/adidas-1-red.png"
         ]
     }

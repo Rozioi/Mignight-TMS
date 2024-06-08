@@ -49,3 +49,30 @@ header p {
 .navlink-offline:hover {
   border-bottom: 2px solid rgb(255, 0, 0);
 }
+
+.search-input-header {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  height: 50px;
+  width: 250px; /* ширина поисковой строки */
+}
+
+.search-input-header input[type="search"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.search-input-header input[type="search"]::placeholder {
+  color: #ccc;
+}
+
+
+
